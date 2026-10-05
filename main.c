@@ -28,25 +28,48 @@ double average_price(Item *item_list, int size) // function calculates and retur
 }
 
 
-void print_items(Item *item_list, int found_index, double average_price) // function loops through each item_list entry and prints the struct values, then prints the average of all item_list prices
-{
-    printf("\n\n###############");
-    printf("Item Name = ");
-    printf("%s", item_list[found_index].name); //prints selected item name
+void print_items(Item *item_list, int size, int found_index, double average_price) // function loops through each item_list entry and prints the struct values, then prints the average of all item_list prices
+{      
+    if (found_index < 5)
+    {
+        printf("\n\n###############");
+        printf("Item Name = ");
+        printf("%s", item_list[found_index].name); //prints selected item name
 
-    printf("\nItem Sku = ");
-    printf("%s", item_list[found_index].sku); //prints selected item sku
+        printf("\nItem Sku = ");
+        printf("%s", item_list[found_index].sku); //prints selected item sku
 
-    printf("\nItem Catagory = ");
-    printf("%s", item_list[found_index].category); //prints selected item category
+        printf("\nItem Catagory = ");
+        printf("%s", item_list[found_index].category); //prints selected item category
 
-    printf("\nItem Price = ");
-    printf("%.2f", item_list[found_index].price); //prints selected item price
+        printf("\nItem Price = ");
+        printf("%.2f", item_list[found_index].price); //prints selected item price
 
-    printf("\n###############");
-    printf("\n\nAverage Price of Items = "); //prints average price of all items
-    printf("%.2f", average_price);
-    printf("\n\n");  
+        printf("\n###############");
+        printf("\n\nAverage Price of Items = "); //prints average price of all items
+        printf("%.2f", average_price);
+        printf("\n\n\n\n");  
+    }
+
+
+    printf("Just in case you want to know...Here is the entire list of inventory items:");
+    int i = 0;
+    for (i = 0; i < size; i++)
+    {
+        printf("\n\n###############\n");
+        printf("Item Name = ");
+        printf("%s", item_list[i].name); //prints selected item name
+
+        printf("\nItem Sku = ");
+        printf("%s", item_list[i].sku); //prints selected item sku
+
+        printf("\nItem Catagory = ");
+        printf("%s", item_list[i].category); //prints selected item category
+
+        printf("\nItem Price = ");
+        printf("%.2f", item_list[i].price); //prints selected item price
+    }
+    printf("\n\nEND OF ENTIRE LIST\n\n");
 }
 
 
@@ -100,17 +123,16 @@ int main(int argc, char *argv[])
     if (count == size) // if count = size, then the sku was not found
     {
         printf("\n\nSku # NOT found in list, sorry!\n\n"); // prints not found
+        avgPrice = 0;
     }
 
     else //if count != size, then the sku was found
     {
         printf("\n\nSku # found in list!"); // prints sku found
         avgPrice = average_price(item_list, size); // executes average price function calculcation
-        print_items(item_list, count,  avgPrice); // executes print fucntion to print selected sku information and the average pricing
     }    
+    print_items(item_list, size, count, avgPrice); // executes print fucntion to print selected sku information and the average pricing
 
     free_items(item_list,  size); // executes function to free all allocated memory
 }
-
-
 
